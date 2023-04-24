@@ -24,6 +24,11 @@ public class NyaEventBus {
 
     private final HashMap<EventListenerOwner, CopyOnWriteArrayList<ListenerMethod>> listenerClasses = new HashMap<>();
 
+    /**
+     * add listener to listener list
+     * automatic scan method
+     * @param listenerOwner Listener Object Instance
+     */
     public void registerListener(EventListenerOwner listenerOwner) {
         if (isRegistered(listenerOwner)) return;
         Method[] publicMethods = listenerOwner.getClass().getMethods();
@@ -64,14 +69,28 @@ public class NyaEventBus {
         }
     }
 
+    /**
+     * Check listener object is registered
+     * @param listenerOwner checked object
+     * @return this listener is registered
+     */
     public boolean isRegistered(EventListenerOwner listenerOwner) {
         return listenerClasses.containsKey(listenerOwner);
     }
 
+    /**
+     * remove form listener list
+     * @param listenerOwner Listener object
+     */
     public void unregisterListener(EventListenerOwner listenerOwner) {
         listenerClasses.remove(listenerOwner);
     }
 
+
+    /**
+     * call all this event method
+     * @param event post event
+     */
     public void postEvent(Event event) {
         for (Map.Entry<EventListenerOwner, CopyOnWriteArrayList<ListenerMethod>> entry :
                 listenerClasses.entrySet()) {

@@ -17,6 +17,11 @@ public abstract class Event {
     public Event() {
     }
 
+    public Event(String eventName, int stage) {
+        this.eventName = eventName;
+        this.stage = stage;
+    }
+
     public Event(String eventName) {
         this.eventName = eventName;
     }

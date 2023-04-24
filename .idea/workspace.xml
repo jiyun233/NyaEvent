@@ -4,29 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a79c22b-95d8-478f-a0c5-6cfe536c04f3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copyright/NyaEvent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/NyaEventBus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/helpers/EventException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/helpers/ListenerPriority.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/interfaces/EventHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/interfaces/EventListenerOwner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/interfaces/ListenerMethod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/interfaces/event/Cancellable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/interfaces/event/Event.java" afterDir="false" />
+    <list default="true" id="5a79c22b-95d8-478f-a0c5-6cfe536c04f3" name="Changes" comment="Init Commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/NyaEventBus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/NyaEventBus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/interfaces/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cute/jiyun233/nya/interfaces/event/Event.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +66,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
     "last_opened_file_path": "/Users/nekonya/IdeaProjects/NyaEvent",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -99,7 +80,7 @@
       <recent name="cute.jiyun233.nya" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.TestClass">
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cute.jiyun233.nya.Test" />
       <module name="NyaEvent.main" />
@@ -113,8 +94,48 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cute.jiyun233.nya.TestClass" />
+      <module name="NyaEvent.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cute.jiyun233.nya.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NyaEvent [build]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.TestClass" />
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Gradle.NyaEvent [build]" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestClass" />
         <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
@@ -128,7 +149,19 @@
       <option name="presentableId" value="Default" />
       <updated>1682226327724</updated>
     </task>
+    <task id="LOCAL-00001" summary="Init Commit">
+      <created>1682319978231</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682319978231</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Init Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Init Commit" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
