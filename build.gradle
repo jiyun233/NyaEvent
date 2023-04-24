@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+}
+
+group 'cute.jiyun233.nya'
+version '0.1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
