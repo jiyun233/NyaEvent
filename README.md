@@ -1,7 +1,7 @@
 # NyaEvent
 A simple and easy-to-use open source event bus
 
-# Usage
+# Example
 ```java
 public class TestClass implements EventListenerOwner {
 
