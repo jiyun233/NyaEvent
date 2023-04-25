@@ -23,10 +23,12 @@ import java.util.stream.Collectors;
 public class NyaEventBus {
 
     private final HashMap<EventListenerOwner, CopyOnWriteArrayList<ListenerMethod>> listenerClasses = new HashMap<>();
-
     /**
      * add listener to listener list
-     * automatic scan method
+     * automatic scan method annotated {@link EventHandler}
+     * <pre>
+     *     EVENT_BUS.register(listenerOwner)
+     * </pre>
      * @param listenerOwner Listener Object Instance
      */
     public void registerListener(EventListenerOwner listenerOwner) {

@@ -50,10 +50,10 @@ public class ListenerMethod {
 
     public void invoke(Event event) {
         try {
-            this.getMethod().setAccessible(false);
+            this.getMethod().setAccessible(true);
             this.getMethod().invoke(father,event);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
