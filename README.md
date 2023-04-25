@@ -16,7 +16,7 @@ public class TestClass implements EventListenerOwner {
         EVENT_BUS.postEvent(new ExampleEvent(0));
     }
 
-    @EventHandler
+    @EventHandler(priority = ListenerPriority.HIGHEST,ignoreCancel = false)
     public void onEvent(ExampleEvent event) {
         System.out.println(event);
     }
