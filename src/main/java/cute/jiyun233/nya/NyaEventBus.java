@@ -18,7 +18,6 @@ import cute.jiyun233.nya.interfaces.event.Event;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 
 public class NyaEventBus {
 
@@ -65,6 +64,7 @@ public class NyaEventBus {
                     throw new EventException("Listener method parameter only allow assignable from Event");
                 }
             }
+            listenerMethods.sort(Comparator.comparing(it -> it.getPrams().priority().num * -1));
             listenerClasses.put(listenerOwner, listenerMethods);
         }catch (Exception exception) {
             exception.printStackTrace();
@@ -97,12 +97,7 @@ public class NyaEventBus {
         for (Map.Entry<EventListenerOwner, CopyOnWriteArrayList<ListenerMethod>> entry :
                 listenerClasses.entrySet()) {
 
-            Set<ListenerMethod> sortedMethod = entry.getValue()
-                    .stream()
-                    .sorted(Comparator.comparing(it -> it.getPrams().priority().num * -1))
-                    .collect(Collectors.toCollection(LinkedHashSet::new));
-
-            for (ListenerMethod listenerMethod : sortedMethod) {
+            for (ListenerMethod listenerMethod : entry.getValue()) {
                 EventHandler prams = listenerMethod.getPrams();
                 if (listenerMethod.getEventClass() == event.getClass()) {
                     if (event instanceof Cancellable) {
