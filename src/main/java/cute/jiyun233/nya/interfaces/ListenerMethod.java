@@ -8,6 +8,7 @@
 
 package cute.jiyun233.nya.interfaces;
 
+import cute.jiyun233.nya.helpers.ListenerPriority;
 import cute.jiyun233.nya.interfaces.event.Event;
 
 import java.lang.reflect.InvocationTargetException;
@@ -16,28 +17,27 @@ import java.util.Objects;
 
 public class ListenerMethod {
 
-    private final Method method;
-
-    private final EventHandler prams;
+    private final EventRunnable runnable;
 
     private final EventListenerOwner father;
+
+    private final ListenerPriority priority;
+
+    private final boolean ignoreCancel;
 
     private final Class<Event> eventClass;
 
 
-    public ListenerMethod(Method method, EventHandler prams, EventListenerOwner father, Class<Event> eventClass) {
-        this.method = method;
-        this.prams = prams;
+    public ListenerMethod(EventRunnable runnable, ListenerPriority priority,boolean ignoreCancel, EventListenerOwner father, Class<Event> eventClass) {
+        this.runnable = runnable;
+        this.priority = priority;
+        this.ignoreCancel = ignoreCancel;
         this.father = father;
         this.eventClass = eventClass;
     }
 
-    public Method getMethod() {
-        return method;
-    }
-
-    public EventHandler getPrams() {
-        return prams;
+    public EventRunnable getRunnable() {
+        return runnable;
     }
 
     public EventListenerOwner getFather() {
@@ -49,12 +49,15 @@ public class ListenerMethod {
     }
 
     public void invoke(Event event) {
-        try {
-            this.getMethod().setAccessible(true);
-            this.getMethod().invoke(father,event);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        runnable.run(event);
+    }
+
+    public ListenerPriority getPriority() {
+        return priority;
+    }
+
+    public boolean isIgnoreCancel() {
+        return ignoreCancel;
     }
 
     @Override
@@ -62,20 +65,21 @@ public class ListenerMethod {
         if (this == o) return true;
         if (!(o instanceof ListenerMethod)) return false;
         ListenerMethod that = (ListenerMethod) o;
-        return Objects.equals(getMethod(), that.getMethod()) && Objects.equals(getPrams(), that.getPrams()) && Objects.equals(getFather(), that.getFather()) && Objects.equals(getEventClass(), that.getEventClass());
+        return ignoreCancel == that.ignoreCancel && Objects.equals(runnable, that.runnable) && Objects.equals(father, that.father) && priority == that.priority && Objects.equals(eventClass, that.eventClass);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getMethod(), getPrams(), getFather(), getEventClass());
+        return Objects.hash(runnable, father, priority, ignoreCancel, eventClass);
     }
 
     @Override
     public String toString() {
         return "ListenerMethod{" +
-                "method=" + method +
-                ", prams=" + prams +
+                "runnable=" + runnable +
                 ", father=" + father +
+                ", priority=" + priority +
+                ", ignoreCancel=" + ignoreCancel +
                 ", eventClass=" + eventClass +
                 '}';
     }

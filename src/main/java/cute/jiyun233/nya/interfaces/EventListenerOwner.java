@@ -8,5 +8,9 @@
 
 package cute.jiyun233.nya.interfaces;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public interface EventListenerOwner {
+    ConcurrentHashMap<EventListenerOwner, CopyOnWriteArrayList<ListenerMethod>> kotlinRunnable = new ConcurrentHashMap<>();
 }

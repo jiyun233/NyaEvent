@@ -1,14 +1,40 @@
-plugins {
-    id 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0"
+    }
 }
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
 
 group 'cute.jiyun233.nya'
 version '0.1.0-SNAPSHOT'
+
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
+configurations {
+    library
+}
 
+dependencies {
+    library("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
+    implementation(configurations.library)
+}
+
+jar {
+    from { configurations.library.collect { it.isDirectory() ? it : zipTree(it) } }
 }

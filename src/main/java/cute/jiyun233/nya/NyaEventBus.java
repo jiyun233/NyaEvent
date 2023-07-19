@@ -11,10 +11,12 @@ package cute.jiyun233.nya;
 import cute.jiyun233.nya.helpers.EventException;
 import cute.jiyun233.nya.interfaces.EventHandler;
 import cute.jiyun233.nya.interfaces.EventListenerOwner;
+import cute.jiyun233.nya.interfaces.EventRunnable;
 import cute.jiyun233.nya.interfaces.ListenerMethod;
 import cute.jiyun233.nya.interfaces.event.Cancellable;
 import cute.jiyun233.nya.interfaces.event.Event;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -51,11 +53,19 @@ public class NyaEventBus {
                 Class<Event> eventClass = Event.class;
                 Class<?> parameterType = method.getParameterTypes()[0];
                 if (eventClass.isAssignableFrom(parameterType)) {
+                    EventHandler annotation = method.getAnnotation(EventHandler.class);
                     //noinspection unchecked
                     listenerMethods.add(
                             new ListenerMethod(
-                                    method,
-                                    method.getAnnotation(EventHandler.class),
+                                    event -> {
+                                        try {
+                                            method.invoke(listenerOwner,event);
+                                        } catch (IllegalAccessException | InvocationTargetException e) {
+                                            e.printStackTrace();
+                                        }
+                                    },
+                                    annotation.priority(),
+                                    annotation.ignoreCancel(),
                                     listenerOwner,
                                     (Class<Event>) parameterType
                             )
@@ -64,7 +74,8 @@ public class NyaEventBus {
                     throw new EventException("Listener method parameter only allow assignable from Event");
                 }
             }
-            listenerMethods.sort(Comparator.comparing(it -> it.getPrams().priority().num * -1));
+            if (EventListenerOwner.kotlinRunnable.containsKey(listenerOwner)) listenerMethods.addAll(EventListenerOwner.kotlinRunnable.get(listenerOwner));
+            listenerMethods.sort(Comparator.comparing(it -> it.getPriority().num * -1));
             listenerClasses.put(listenerOwner, listenerMethods);
         }catch (Exception exception) {
             exception.printStackTrace();
@@ -98,11 +109,10 @@ public class NyaEventBus {
                 listenerClasses.entrySet()) {
 
             for (ListenerMethod listenerMethod : entry.getValue()) {
-                EventHandler prams = listenerMethod.getPrams();
                 if (listenerMethod.getEventClass() == event.getClass()) {
                     if (event instanceof Cancellable) {
                         Cancellable cancellable = (Cancellable) event;
-                        if (cancellable.isCanceled() && prams.ignoreCancel()) continue;
+                        if (cancellable.isCanceled() && listenerMethod.isIgnoreCancel()) continue;
                     }
                     listenerMethod.invoke(event);
                 }
